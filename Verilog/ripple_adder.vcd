@@ -1,0 +1,31 @@
+$date
+	Fri May 10 22:32:57 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module tb_four_bit_full_adder $end
+$var wire 1 ! cout $end
+$var wire 4 " sum [3:0] $end
+$var reg 4 # a [3:0] $end
+$var reg 4 $ b [3:0] $end
+$var reg 1 % cin $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+0%
+b110 $
+b1010 #
+bz "
+z!
+$end
+#5
+1%
+#10
