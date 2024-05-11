@@ -51,7 +51,6 @@ module tb_four_bit_full_adder;
 endmodule
 
 //another best one
-
 /*
 module full_adder(
     input a,b,cin,
