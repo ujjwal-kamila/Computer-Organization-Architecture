@@ -1,58 +1,65 @@
+// D Flip-Flop Module with FSM (Finite State Machine)
 module d_flipflop(
-    input wire clk,
-    input wire reset,
-    input wire d,
-    output reg q
+    input wire clk,    // Clock input
+    input wire reset,  // Reset input
+    input wire d,      // Data input
+    output reg q       // Output
 );
-    parameter IDLE = 2'b00;
-    parameter SET = 2'b01;
-    parameter RESET = 2'b10;
 
-    reg [1:0] state, next_state;
+    // State encoding
+    parameter IDLE = 2'b00;    // IDLE state
+    parameter SET = 2'b01;     // SET state
+    parameter RESET = 2'b10;   // RESET state
 
-    always @(posedge clk, posedge reset)
+    reg [1:0] state, next_state; // Current state and next state registers
+
+    // State transition on clock's positive edge or reset's positive edge
+    always @(posedge clk or posedge reset)
     begin
-        if (reset)
+        if (reset) // Asynchronous reset
         begin
-            state <= IDLE;
-            q <= 1'b0;
+            state <= IDLE; // Set state to IDLE
+            q <= 1'b0;     // Clear output
         end
         else
-            state <= next_state;
+            state <= next_state; // Move to next state
     end
 
+    // Next state logic
     always @(*)
     begin
         case (state)
             IDLE: begin
                 if (d)
-                    next_state = SET;
+                    next_state = SET; // Transition to SET state if data input is high
                 else
-                    next_state = RESET;
+                    next_state = RESET; // Transition to RESET state if data input is low
             end
             SET: begin
-                next_state = IDLE;
-                q <= 1'b1;
+                next_state = IDLE; // Transition back to IDLE state
+                q <= 1'b1;         // Set output to high
             end
             RESET: begin
-                next_state = IDLE;
-                q <= 1'b0;
+                next_state = IDLE; // Transition back to IDLE state
+                q <= 1'b0;         // Clear output
             end
-            default: next_state = IDLE;
+            default: next_state = IDLE; // Default state transition to IDLE
         endcase
     end
 
 endmodule
 
+// Testbench for D Flip-Flop Module
 module d_flipflop_tb;
 
-    parameter CLK_PERIOD = 10;
+    parameter CLK_PERIOD = 10; // Clock period for the simulation
 
-    reg clk;
-    reg reset;
-    reg d;
-    wire q;
+    reg clk;    // Clock signal
+    reg reset;  // Reset signal
+    reg d;      // Data input signal
+    wire q;     // Output signal
 
+    // Instantiate the D flip-flop module
     d_flipflop DUT(
         .clk(clk),
         .reset(reset),
@@ -60,32 +67,36 @@ module d_flipflop_tb;
         .q(q)
     );
 
+    // Clock generation: Toggle clock every half period
     always #((CLK_PERIOD / 2)) clk <= ~clk;
 
+    // Initial block for simulation setup
     initial begin
-        $dumpfile("d_flipflop_tb.vcd");
-        $dumpvars(0, d_flipflop_tb);
+        $dumpfile("d_flipflop_tb.vcd"); // Dump file for waveform
+        $dumpvars(0, d_flipflop_tb);    // Dump variables for all simulation instances
 
-        reset = 1;
-        #20 reset = 0;
+        reset = 1;  // Apply reset
+        #20 reset = 0; // Release reset after 20 time units
 
-        d = 0;
-        #20 d = 1;
-        #20 d = 0;
-        #20 d = 1;
-        #20 d = 0;
-        #20 $finish;
+        d = 0;     // Set data input to 0
+        #20 d = 1; // Change data input to 1 after 20 time units
+        #20 d = 0; // Change data input to 0 after 20 time units
+        #20 d = 1; // Change data input to 1 after 20 time units
+        #20 d = 0; // Change data input to 0 after 20 time units
+        #20 $finish; // End simulation after sufficient time
     end
 
 endmodule
 
+// Waveform Bench for D Flip-Flop Module
 module d_flipflop_wb;
 
-    reg clk;
-    reg reset;
-    reg d;
-    wire q;
+    reg clk;    // Clock signal
+    reg reset;  // Reset signal
+    reg d;      // Data input signal
+    wire q;     // Output signal
 
+    // Instantiate the D flip-flop module
     d_flipflop DUT(
         .clk(clk),
         .reset(reset),
@@ -93,16 +104,18 @@ module d_flipflop_wb;
         .q(q)
     );
 
+    // Clock generation: Toggle clock every 5 time units
     always #5 clk <= ~clk;
 
+    // Initial block for simulation setup
     initial begin
+        reset = 1;  // Apply reset
+        #20 reset = 0; // Release reset after 20 time units
 
-        reset = 1;
-        #20 reset = 0;
-
+        // Toggle data input 10 times with a delay of 10 time units
         repeat (10) begin
             #10 d = ~d;
         end
-        #10 $finish;
+        #10 $finish; // End simulation after sufficient time
     end
 endmodule
