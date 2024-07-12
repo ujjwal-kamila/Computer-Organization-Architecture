@@ -1,3 +1,6 @@
+
+//  Implementing Traffic Light controller using verilog 
+
 module traffic_light_controller (
     input wire CLK,
     input wire RESET,
