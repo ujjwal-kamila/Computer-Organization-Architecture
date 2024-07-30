@@ -1,10 +1,7 @@
 `timescale 1ns / 1ps
 
-/* ----------------------------------------------
+/*
  * Behavioral design of a simple processor (MU01)
- * for classroom teaching
- * ----------------------------------------------
- * Author: Santanu Chatterjee, Dept. of CSE, MAKAUT,WB
  */
 
 module mu01
