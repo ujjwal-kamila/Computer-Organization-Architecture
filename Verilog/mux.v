@@ -1,4 +1,6 @@
+//Behavioural 
 module mux1b4to1 (
+
     input a, b, c, d,
     input s1, s2,
     output e

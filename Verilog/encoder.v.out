@@ -1,0 +1,61 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1539-g2693dd32b)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_000001ccdd61cff0 .scope module, "wb_en" "wb_en" 2 22;
+ .timescale 0 0;
+v000001ccdd569980_0 .net "ABCD", 3 0, v000001ccdd569840_0;  1 drivers
+v000001ccdd569a20_0 .net "YZ", 1 0, L_000001ccdd569c00;  1 drivers
+S_000001ccdd61d180 .scope module, "enc_1hot" "encoder_1hot_4to2" 2 26, 2 1 0, S_000001ccdd61cff0;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 2 "YZ";
+    .port_info 1 /INPUT 4 "ABCD";
+L_000001ccdd525840 .functor OR 1, L_000001ccdd569ac0, L_000001ccdd569b60, C4<0>, C4<0>;
+L_000001ccdd524810 .functor OR 1, L_000001ccdd522fb0, L_000001ccdd523730, C4<0>, C4<0>;
+v000001ccdd617070_0 .net "ABCD", 3 0, v000001ccdd569840_0;  alias, 1 drivers
+v000001ccdd61beb0_0 .net "YZ", 1 0, L_000001ccdd569c00;  alias, 1 drivers
+v000001ccdd61d310_0 .net *"_ivl_12", 0 0, L_000001ccdd522fb0;  1 drivers
+v000001ccdd61d3b0_0 .net *"_ivl_14", 0 0, L_000001ccdd523730;  1 drivers
+v000001ccdd6168c0_0 .net *"_ivl_15", 0 0, L_000001ccdd524810;  1 drivers
+v000001ccdd616960_0 .net *"_ivl_3", 0 0, L_000001ccdd569ac0;  1 drivers
+v000001ccdd616a00_0 .net *"_ivl_5", 0 0, L_000001ccdd569b60;  1 drivers
+v000001ccdd616aa0_0 .net *"_ivl_6", 0 0, L_000001ccdd525840;  1 drivers
+L_000001ccdd569ac0 .part v000001ccdd569840_0, 3, 1;
+L_000001ccdd569b60 .part v000001ccdd569840_0, 2, 1;
+L_000001ccdd569c00 .concat8 [ 1 1 0 0], L_000001ccdd524810, L_000001ccdd525840;
+L_000001ccdd522fb0 .part v000001ccdd569840_0, 3, 1;
+L_000001ccdd523730 .part v000001ccdd569840_0, 1, 1;
+S_000001ccdd616b40 .scope module, "tb" "tb_encoder" 2 27, 2 9 0, S_000001ccdd61cff0;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 4 "ABCD";
+    .port_info 1 /INPUT 2 "YZ";
+v000001ccdd569840_0 .var "ABCD", 3 0;
+v000001ccdd5698e0_0 .net "YZ", 1 0, L_000001ccdd569c00;  alias, 1 drivers
+    .scope S_000001ccdd616b40;
+T_0 ;
+    %pushi/vec4 0, 0, 4;
+    %store/vec4 v000001ccdd569840_0, 0, 4;
+    %delay 5, 0;
+    %pushi/vec4 1, 0, 4;
+    %store/vec4 v000001ccdd569840_0, 0, 4;
+    %delay 5, 0;
+    %pushi/vec4 2, 0, 4;
+    %store/vec4 v000001ccdd569840_0, 0, 4;
+    %delay 5, 0;
+    %pushi/vec4 4, 0, 4;
+    %store/vec4 v000001ccdd569840_0, 0, 4;
+    %delay 5, 0;
+    %pushi/vec4 8, 0, 4;
+    %store/vec4 v000001ccdd569840_0, 0, 4;
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "encoder.v";
